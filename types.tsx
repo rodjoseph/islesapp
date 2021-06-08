@@ -17,6 +17,8 @@ export type MainStackParamList = {
   Homebuying: undefined;
   Foreclosure: undefined;
   MemberUpdate: undefined;
+  PrivacyPolicy: undefined;
+  Credit: undefined;
 };
 
 export type TabOneParamList = {
