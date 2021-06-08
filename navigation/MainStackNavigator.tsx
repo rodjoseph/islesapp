@@ -10,6 +10,8 @@ import { ContactScreen } from "../screens/AboutContact";
 import BudgetCalculatorScreen from "../screens/BudgetCalculatorScreen";
 import ForeclosureScreen from "../screens/ForeclosureScreen";
 import BudgetScreen from "../screens/BudgetScreen";
+import CreditScreen from "../screens/Credit";
+import { PrivacyPolicyScreen } from "../screens/PrivacyPolicy";
 
 const MainStack = createStackNavigator<MainStackParamList>();
 
@@ -31,12 +33,14 @@ export function MainStackNavigator() {
         component={HomeScreen}
         options={{ headerTitle: props => <LogoTitle  />}}
       />
-      <MainStack.Screen name="Mortgage" component={MortgageCalculatorScreen} options={{headerTransparent: true}}></MainStack.Screen>
-      <MainStack.Screen name="Debt" component={DebtCalculatorScreen} options={{headerTransparent: true}}></MainStack.Screen>
-      <MainStack.Screen name="Homebuying" component={HomebuyerScreen} options={{headerTransparent: true}}></MainStack.Screen>
-      <MainStack.Screen name="Foreclosure" component={ForeclosureScreen} options={{headerTransparent: true}}></MainStack.Screen>
-      <MainStack.Screen name="Budget" component={BudgetScreen} options={{headerTransparent: true}}></MainStack.Screen>
-      <MainStack.Screen name="AboutContact" component={ContactScreen} options={{headerTransparent: true}}></MainStack.Screen>
+      <MainStack.Screen name="Mortgage" component={MortgageCalculatorScreen} options={{}}></MainStack.Screen>
+      <MainStack.Screen name="Debt" component={DebtCalculatorScreen} options={{}}></MainStack.Screen>
+      <MainStack.Screen name="Homebuying" component={HomebuyerScreen} options={{}}></MainStack.Screen>
+      <MainStack.Screen name="Foreclosure" component={ForeclosureScreen} options={{}}></MainStack.Screen>
+      <MainStack.Screen name="Budget" component={BudgetScreen} options={{}}></MainStack.Screen>
+      <MainStack.Screen name="AboutContact" component={ContactScreen} options={{headerTitle: "About Us/ Contact"}}></MainStack.Screen>
+      <MainStack.Screen name="Credit" component={CreditScreen} options={{}}></MainStack.Screen>
+      <MainStack.Screen name="PrivacyPolicy" component={PrivacyPolicyScreen} options={{}}></MainStack.Screen>
     </MainStack.Navigator>
   );
 }
