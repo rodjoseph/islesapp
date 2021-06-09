@@ -1,6 +1,6 @@
 {
   "expo": {
-    "name": "Isles",
+    "name": "Isles Financial Solutions",
     "slug": "islesapp",
     "version": "0.0.1",
     "orientation": "portrait",
@@ -41,6 +41,9 @@
         "wasm",
         "svg"
       ]
+    },
+    "android": {
+      "package": "com.rodjoseph.islesapp"
     }
   }
 }
