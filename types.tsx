@@ -19,6 +19,8 @@ export type MainStackParamList = {
   MemberUpdate: undefined;
   PrivacyPolicy: undefined;
   Credit: undefined;
+  HowCreditScoresCalculated: undefined;
+  WebViewScreen: {url: string};
 };
 
 export type TabOneParamList = {

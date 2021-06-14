@@ -3,7 +3,7 @@ import { StyleSheet, Alert, Keyboard, TouchableWithoutFeedback, Image, useColorS
 import { Finance } from 'financejs'
 import { Text, TextInput, View} from '../components/Themed';
 import { Button, Card } from 'react-native-elements';
-import { StackNavigationProp } from '@react-navigation/stack';
+import { StackNavigationProp, StackScreenProps } from '@react-navigation/stack';
 import { MainStackParamList } from '../types';
 import { FlatList, ScrollView, TouchableOpacity } from 'react-native-gesture-handler';
 import { useTheme } from '../hooks/useTheme';
@@ -25,7 +25,7 @@ function CustomButton({title, onPress} : CustomButtonProps) {
     )
 }
 
-export default function ForeclosureScreen({}: StackNavigationProp<MainStackParamList, 'Foreclosure'>) {
+export default function ForeclosureScreen({navigation}: StackScreenProps<MainStackParamList, 'Foreclosure'>) {
 
   const insets = useSafeAreaInsets()
   const colorScheme = useColorScheme()
@@ -38,7 +38,7 @@ export default function ForeclosureScreen({}: StackNavigationProp<MainStackParam
 IFS housing counselors can help guide the way. We are readily available to help you make sense of it all.
 </Text>
       </View>
-      <TouchableOpacity style={{backgroundColor: Colors[colorScheme!]["surface"], borderRadius: 10, paddingVertical: 20, paddingHorizontal: 14, marginVertical: 10, width: "100%"}} onPress={() => Linking.openURL("https://drive.google.com/file/d/1zn-PhaPSHM9LghAIhvJY9aTwFtUF0RrA/view?usp=sharing")}>
+      <TouchableOpacity style={{backgroundColor: Colors[colorScheme!]["surface"], borderRadius: 10, paddingVertical: 20, paddingHorizontal: 14, marginVertical: 10, width: "100%"}} onPress={() => navigation.navigate('WebViewScreen', {url: "http://expo.io"})}>
         <MortgageLoan width="100%" height={150}/>
         <Text style={[styles.title, {paddingHorizontal: 14}]}>Homeowner's Guide to Success</Text>
       </TouchableOpacity>
