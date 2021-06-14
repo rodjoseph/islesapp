@@ -6,9 +6,13 @@ import Section from '../components/Surface';
 import { View, Text } from '../components/Themed';
 import Colors from '../constants/Colors';
 import CreditScoreImg from '../assets/images/speedometer.svg'
-import { useHeaderHeight } from '@react-navigation/stack';
+import { StackNavigationProp, StackScreenProps, useHeaderHeight } from '@react-navigation/stack';
 import { Scroller } from '../components/Scroller';
-export default function CreditScreen() {
+import { MainStackParamList } from '../types';
+
+type CreditScreenProps = StackScreenProps<MainStackParamList, 'Credit'>
+
+export default function CreditScreen({navigation} : CreditScreenProps) {
 
     const colorScheme = useColorScheme()
     const insets = useSafeAreaInsets()
@@ -21,7 +25,7 @@ export default function CreditScreen() {
         <Text style={styles.baseText}>We can review your credit report and answer questions about credit scoring, building a strong credit history and correcting any inaccuracies that appear. Our counselors tailor solutions to meet your needs.
         </Text>
       </View>
-      <TouchableOpacity style={{backgroundColor: Colors[colorScheme!]["surface"], borderRadius: 10, paddingVertical: 20, paddingHorizontal: 14, marginVertical: 10, width: "100%"}} onPress={() => Linking.openURL("https://drive.google.com/file/d/1TC4QMsz-bFDaeQZPrS58iFBehswIBCQ6/view?usp=sharing")}>
+      <TouchableOpacity style={{backgroundColor: Colors[colorScheme!]["surface"], borderRadius: 10, paddingVertical: 20, paddingHorizontal: 14, marginVertical: 10, width: "100%"}} onPress={() => navigation.navigate('HowCreditScoresCalculated')}>
         <CreditScoreImg width={350} height={100} style={{marginVertical: 20}}/>
         <Text style={[styles.title, {paddingHorizontal: 14}]}>How Credit Scores Are Calculated</Text>
       </TouchableOpacity>

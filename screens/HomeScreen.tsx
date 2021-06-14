@@ -65,7 +65,7 @@ export function HomeScreen({navigation} : HomeScreenProps) {
       name: 'Intake Form', 
       imageSrc: require('../assets/images/check-list.png'),
       subtitle: "Send your information to Isles for a follow-up",
-      onPress: () => {openLink('http://tfaforms.com/335432/')},
+      onPress: () => {navigation.navigate('WebViewScreen', {url: 'http://tfaforms.com/335432/'})},
       id: 3
     },
     { name: 'Foreclosure',

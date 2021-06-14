@@ -12,6 +12,9 @@ import ForeclosureScreen from "../screens/ForeclosureScreen";
 import BudgetScreen from "../screens/BudgetScreen";
 import CreditScreen from "../screens/Credit";
 import { PrivacyPolicyScreen } from "../screens/PrivacyPolicy";
+import { HowCreditScoresCalculatedScreen } from "../screens/HowCreditScoresCalculated";
+import HomeownersGuideScreen from "../screens/WebViewScreen";
+import WebViewScreen from "../screens/WebViewScreen";
 
 const MainStack = createStackNavigator<MainStackParamList>();
 
@@ -41,6 +44,8 @@ export function MainStackNavigator() {
       <MainStack.Screen name="AboutContact" component={ContactScreen} options={{headerTitle: "About Us/ Contact"}}></MainStack.Screen>
       <MainStack.Screen name="Credit" component={CreditScreen} options={{}}></MainStack.Screen>
       <MainStack.Screen name="PrivacyPolicy" component={PrivacyPolicyScreen} options={{}}></MainStack.Screen>
+      <MainStack.Screen name="HowCreditScoresCalculated" component={HowCreditScoresCalculatedScreen} options={{headerTitle: "How Credit Scores are Calculated"}}></MainStack.Screen>
+      <MainStack.Screen name="WebViewScreen" component={WebViewScreen}></MainStack.Screen>
     </MainStack.Navigator>
   );
 }

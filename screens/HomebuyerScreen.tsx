@@ -2,7 +2,7 @@ import * as React from 'react';
 import { StyleSheet, Alert, Keyboard, TouchableWithoutFeedback, Image, useColorScheme, ListRenderItem, Linking} from 'react-native';
 import { Finance } from 'financejs'
 import { Text, TextInput, View} from '../components/Themed';
-import { StackNavigationProp, useHeaderHeight } from '@react-navigation/stack';
+import { StackNavigationProp, StackScreenProps, useHeaderHeight } from '@react-navigation/stack';
 import { MainStackParamList } from '../types';
 import { FlatList, ScrollView, TouchableOpacity } from 'react-native-gesture-handler';
 import BuyHouseImg from '../assets/images/undraw_buy_house_560d.svg'
@@ -22,14 +22,14 @@ function CustomButton({title, onPress} : CustomButtonProps) {
         </TouchableOpacity>
     )
 }
-export default function HomebuyerScreen({}: StackNavigationProp<MainStackParamList, 'Homebuying'>) {
+export default function HomebuyerScreen({navigation}: StackScreenProps<MainStackParamList, 'Homebuying'>) {
 
   const insets = useSafeAreaInsets()
   const colorScheme = useColorScheme()
 
   type PdfItem = {
     title?: string,
-    pdfFile: any,
+    pdfFile: string,
     id: string
   }
   const pdfs: PdfItem[] = [
@@ -45,13 +45,13 @@ export default function HomebuyerScreen({}: StackNavigationProp<MainStackParamLi
     },
     {
       title: "Home Loan Toolkit",
-      pdfFile: "https://drive.google.com/file/d/1sylbizY_lfYVRF8VM0-9mhCZBHKg_LXj/view?usp=sharing",
+      pdfFile:  require('../assets/pdfs/HomeLoan.pdf'),//"https://drive.google.com/file/d/1sylbizY_lfYVRF8VM0-9mhCZBHKg_LXj/view?usp=sharing",
       id: '3',
     }
   ]
   const _renderPdf: ListRenderItem<PdfItem> = ({item}) => {
     return(
-      <TouchableOpacity onPress={() => Linking.openURL(item.pdfFile)} style={{padding: 10, height: 150, width: 130, backgroundColor: Colors[colorScheme!]["surface"], marginHorizontal: 10, borderRadius: 5}}>
+      <TouchableOpacity onPress={() => navigation.navigate('WebViewScreen', {url: item.pdfFile})} style={{padding: 10, height: 150, width: 130, backgroundColor: Colors[colorScheme!]["surface"], marginHorizontal: 10, borderRadius: 5}}>
         <Text>{item.title}</Text>
       </TouchableOpacity>
     )
