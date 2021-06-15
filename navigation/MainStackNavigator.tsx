@@ -15,6 +15,7 @@ import { PrivacyPolicyScreen } from "../screens/PrivacyPolicy";
 import { HowCreditScoresCalculatedScreen } from "../screens/HowCreditScoresCalculated";
 import HomeownersGuideScreen from "../screens/WebViewScreen";
 import WebViewScreen from "../screens/WebViewScreen";
+import PdfReaderScreen from "../screens/PdfReaderScreen";
 
 const MainStack = createStackNavigator<MainStackParamList>();
 
@@ -46,6 +47,7 @@ export function MainStackNavigator() {
       <MainStack.Screen name="PrivacyPolicy" component={PrivacyPolicyScreen} options={{}}></MainStack.Screen>
       <MainStack.Screen name="HowCreditScoresCalculated" component={HowCreditScoresCalculatedScreen} options={{headerTitle: "How Credit Scores are Calculated"}}></MainStack.Screen>
       <MainStack.Screen name="WebViewScreen" component={WebViewScreen}></MainStack.Screen>
+      <MainStack.Screen name="PdfReaderScreen" component={PdfReaderScreen}></MainStack.Screen>
     </MainStack.Navigator>
   );
 }

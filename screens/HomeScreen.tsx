@@ -8,8 +8,10 @@ import * as WebBrowser from 'expo-web-browser';
 import { MainStackParamList } from '../types';
 import useColorScheme from '../hooks/useColorScheme';
 import Colors from '../constants/Colors';
-import { FlatList } from 'react-native-gesture-handler';
+import { FlatList, ScrollView } from 'react-native-gesture-handler';
 import { useSafeAreaInsets } from 'react-native-safe-area-context';
+import { Scroller } from '../components/Scroller';
+import PDFReader from 'rn-pdf-reader-js'
 
 const Stack = createStackNavigator();
 library.add(faCoins, faChartPie, faCoffee)
@@ -48,38 +50,11 @@ export function HomeScreen({navigation} : HomeScreenProps) {
     //   subtitle: "\"I want to get out of debt and stop living paycheck to paycheck\"", 
     //   onPress: () => {navigation.navigate('Debt')}
     // },
-    { name: 'Budget',
+    { name: 'Budgeting',
       imageSrc: require('../assets/images/budgeting.png'),
       subtitle: "Know where your money is going",
       onPress: () => {navigation.navigate('Budget')}, 
       id: 1
-    },
-    
-    { name: 'Homebuying',
-    imageSrc: require('../assets/images/mortgage.png'),
-      subtitle: "Want to buy your first home?",
-      onPress: () => {navigation.navigate('Homebuying')},
-      id: 2
-    },
-    { 
-      name: 'Intake Form', 
-      imageSrc: require('../assets/images/check-list.png'),
-      subtitle: "Send your information to Isles for a follow-up",
-      onPress: () => {navigation.navigate('WebViewScreen', {url: 'http://tfaforms.com/335432/'})},
-      id: 3
-    },
-    { name: 'Foreclosure',
-    imageSrc: require('../assets/images/bank-risk.png'),
-      subtitle: 'Stop foreclosure and learn about your options',
-      onPress: () => {navigation.navigate('Foreclosure')},
-      id: 4
-    },
-    { 
-      name: 'About Us/Contact', 
-      imageSrc: require('../assets/images/help.png'),
-      subtitle: "Learn about Isles or contact us.",
-      onPress: () => {navigation.navigate('AboutContact')},
-      id: 5
     },
     { 
       name: 'Credit', 
@@ -88,6 +63,27 @@ export function HomeScreen({navigation} : HomeScreenProps) {
       onPress: () => {navigation.navigate('Credit')},
       id: 6
     },
+    { name: 'Homebuying',
+    imageSrc: require('../assets/images/mortgage.png'),
+      subtitle: "Want to buy your first home?",
+      onPress: () => {navigation.navigate('Homebuying')},
+      id: 2
+    },
+    // { 
+    //   name: 'Intake Form', 
+    //   imageSrc: require('../assets/images/check-list.png'),
+    //   subtitle: "Send your information to Isles for a follow-up",
+    //   onPress: () => {navigation.navigate('WebViewScreen', {url: 'http://tfaforms.com/335432/'})},
+    //   id: 3
+    // },
+    { name: 'Foreclosure',
+    imageSrc: require('../assets/images/bank-risk.png'),
+      subtitle: 'Stop foreclosure and learn about your options',
+      onPress: () => {navigation.navigate('Foreclosure')},
+      id: 4
+    },
+
+
     // { 
     //   name: 'Member Update', 
     // }
@@ -115,29 +111,40 @@ export function HomeScreen({navigation} : HomeScreenProps) {
   const insets = useSafeAreaInsets()
 
   return (
-    <View style={[styles.container]}>
+    <Scroller>
       <FlatList
       data={items}
       numColumns={2}
       renderItem={_renderCard}
       style={{paddingVertical: 24}}
+      ListHeaderComponent={<Text style={{fontSize: 16, opacity: 0.8, marginVertical: 8, marginHorizontal: 8, textAlign: "center"}}>Isles Financial Solutions (IFS) is a financial health service for low to moderate income individuals. IFS tailor’s financial solutions to meet your goals and needs with our innovative approach.</Text>}
+      ListFooterComponent={
+      <View style={[styles.itemContainer, { backgroundColor: theme.surface, width: "98%"}]}>
+        <TouchableOpacity onPress={() => navigation.navigate('AboutContact')}>
+            <Image style={{height: 100, width: "100%", marginVertical: 14}} source={require('../assets/images/1480796.png')} resizeMode="contain"/>
+          <Text style={styles.itemName}>About/Contact Us</Text>
+        </TouchableOpacity>
+      </View>
+      }
     />
-    </View>
+    
+    </Scroller>
   );
 }
 
 
 const styles = StyleSheet.create({
   container: {
-    flex: 1,
     paddingHorizontal: 14,
     alignItems: 'center',
     justifyContent: 'center',
     width: '100%'
   },
   title: {
-    fontSize: 20,
+    fontSize: 22,
     fontWeight: 'bold',
+    marginBottom: 8,
+    marginHorizontal: 8
   },
   separator: {
     marginVertical: 30,
@@ -150,7 +157,7 @@ const styles = StyleSheet.create({
     padding: 14,
     shadowRadius: 50,
     width: "48%",
-    height: 220,
+    height: 200,
     margin: "1%"
   },
   itemName: {

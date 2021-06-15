@@ -9,6 +9,7 @@ import BuyHouseImg from '../assets/images/undraw_buy_house_560d.svg'
 import { useSafeAreaInsets } from 'react-native-safe-area-context';
 import Colors from '../constants/Colors';
 import { Scroller } from '../components/Scroller';
+import { Asset } from 'expo-asset';
 
 type CustomButtonProps = {
     title?: string,
@@ -35,12 +36,12 @@ export default function HomebuyerScreen({navigation}: StackScreenProps<MainStack
   const pdfs: PdfItem[] = [
     {
       title: "Pathway to Homebuying",
-      pdfFile: "https://drive.google.com/file/d/1aMth_fdf_QyXN6eULznqmiGBX3NwXQP3/view?usp=sharing",
+      pdfFile: require('../assets/pdfs/Pathway_to_Home_Buying.pdf'), //"https://drive.google.com/file/d/1aMth_fdf_QyXN6eULznqmiGBX3NwXQP3/view?usp=sharing",
       id: '1',
     },
     {
       title: "Homeowner's Guide to Success",
-      pdfFile: "https://drive.google.com/file/d/1zn-PhaPSHM9LghAIhvJY9aTwFtUF0RrA/view?usp=sharing",
+      pdfFile: require('../assets/pdfs/HomeownersGuide.pdf'), //"https://drive.google.com/file/d/1zn-PhaPSHM9LghAIhvJY9aTwFtUF0RrA/view?usp=sharing",
       id: '2',
     },
     {
@@ -49,9 +50,11 @@ export default function HomebuyerScreen({navigation}: StackScreenProps<MainStack
       id: '3',
     }
   ]
+
+
   const _renderPdf: ListRenderItem<PdfItem> = ({item}) => {
     return(
-      <TouchableOpacity onPress={() => navigation.navigate('WebViewScreen', {url: item.pdfFile})} style={{padding: 10, height: 150, width: 130, backgroundColor: Colors[colorScheme!]["surface"], marginHorizontal: 10, borderRadius: 5}}>
+      <TouchableOpacity onPress={() => navigation.navigate('PdfReaderScreen', {uri: Asset.fromModule(item.pdfFile).uri})} style={{padding: 10, height: 150, width: 130, backgroundColor: Colors[colorScheme!]["surface"], marginHorizontal: 10, borderRadius: 5}}>
         <Text>{item.title}</Text>
       </TouchableOpacity>
     )
