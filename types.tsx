@@ -22,6 +22,9 @@ export type MainStackParamList = {
   HowCreditScoresCalculated: undefined;
   WebViewScreen: {url: string};
   PdfReaderScreen: {uri: string, documentTitle?: string};
+  CardGameScreen: undefined;
+  ExpensesScreen: undefined;
+  SavingsScreen: undefined;
 };
 
 export type TabOneParamList = {

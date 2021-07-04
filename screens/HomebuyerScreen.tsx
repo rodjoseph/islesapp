@@ -5,7 +5,7 @@ import { Text, TextInput, View} from '../components/Themed';
 import { StackNavigationProp, StackScreenProps, useHeaderHeight } from '@react-navigation/stack';
 import { MainStackParamList } from '../types';
 import { FlatList, ScrollView, TouchableOpacity } from 'react-native-gesture-handler';
-import BuyHouseImg from '../assets/images/undraw_buy_house_560d.svg'
+import HousesImg from '../assets/images/undraw_houses3_xwf7.svg'
 import { useSafeAreaInsets } from 'react-native-safe-area-context';
 import Colors from '../constants/Colors';
 import { Scroller } from '../components/Scroller';
@@ -54,7 +54,7 @@ export default function HomebuyerScreen({navigation}: StackScreenProps<MainStack
 
   const _renderPdf: ListRenderItem<PdfItem> = ({item}) => {
     return(
-      <TouchableOpacity onPress={() => navigation.navigate('PdfReaderScreen', {uri: Asset.fromModule(item.pdfFile).uri})} style={{padding: 10, height: 150, width: 130, backgroundColor: Colors[colorScheme!]["surface"], marginHorizontal: 10, borderRadius: 5}}>
+      <TouchableOpacity onPress={() => navigation.navigate('PdfReaderScreen', {uri: Asset.fromModule(item.pdfFile).uri, documentTitle: item.title})} style={{padding: 10, height: 150, width: 130, backgroundColor: Colors[colorScheme!]["surface"], marginHorizontal: 10, borderRadius: 5}}>
         <Text>{item.title}</Text>
       </TouchableOpacity>
     )
@@ -64,7 +64,7 @@ export default function HomebuyerScreen({navigation}: StackScreenProps<MainStack
   return (
     <Scroller>
       <View style={{backgroundColor: Colors[colorScheme!]["surface"], borderRadius: 10, paddingVertical: 20, paddingHorizontal: 14, marginVertical: 20 }}>
-        <BuyHouseImg width={350} height={100} style={{marginVertical: 20}}/>
+        <HousesImg width={350} height={100} style={{marginVertical: 20}}/>
         <Text style={{opacity: 0.6, marginVertical: 8}}>Want to buy your first home?</Text>
         <Text style={styles.baseText}>The first year of homeownership is often the most challenging. Our Pre-Purchase Counseling Program will help you prepare for the added expenses and responsibilities of owning a home, so you know what to expect, and where to turn for help. From setting a realistic household budget and reviewing credit reports, to explaining the home-ownership process and lending requirements, our counselors can help guide the way. </Text>
       </View>

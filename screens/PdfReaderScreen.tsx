@@ -8,6 +8,10 @@ import { StyleSheet } from 'react-native';
 type PdfReaderScreenProps = StackScreenProps<MainStackParamList, 'PdfReaderScreen'>
 
 export default function PdfReaderScreen({route, navigation} : PdfReaderScreenProps) {
+
+    React.useEffect(() => {
+        navigation.setOptions({headerTitle: route.params.documentTitle? route.params.documentTitle : ""})
+    }, [])
     return(
         <PDFReader
         source={{

@@ -16,6 +16,8 @@ import { HowCreditScoresCalculatedScreen } from "../screens/HowCreditScoresCalcu
 import HomeownersGuideScreen from "../screens/WebViewScreen";
 import WebViewScreen from "../screens/WebViewScreen";
 import PdfReaderScreen from "../screens/PdfReaderScreen";
+import CardGameScreen from "../screens/CardGameScreen";
+import { Expenses } from "../screens/Expenses";
 
 const MainStack = createStackNavigator<MainStackParamList>();
 
@@ -35,7 +37,7 @@ export function MainStackNavigator() {
       <MainStack.Screen
         name="Home"
         component={HomeScreen}
-        options={{ headerTitle: props => <LogoTitle  />}}
+        options={{ headerTitle: props => <LogoTitle  />,}}
       />
       <MainStack.Screen name="Mortgage" component={MortgageCalculatorScreen} options={{}}></MainStack.Screen>
       <MainStack.Screen name="Debt" component={DebtCalculatorScreen} options={{}}></MainStack.Screen>
@@ -48,6 +50,8 @@ export function MainStackNavigator() {
       <MainStack.Screen name="HowCreditScoresCalculated" component={HowCreditScoresCalculatedScreen} options={{headerTitle: "How Credit Scores are Calculated"}}></MainStack.Screen>
       <MainStack.Screen name="WebViewScreen" component={WebViewScreen}></MainStack.Screen>
       <MainStack.Screen name="PdfReaderScreen" component={PdfReaderScreen}></MainStack.Screen>
+      <MainStack.Screen name="CardGameScreen" component={CardGameScreen}/>
+      <MainStack.Screen name="ExpensesScreen" component={Expenses} options={{headerTitle: "Expenses"}}/>
     </MainStack.Navigator>
   );
 }

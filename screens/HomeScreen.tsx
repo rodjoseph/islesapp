@@ -119,7 +119,7 @@ export function HomeScreen({navigation} : HomeScreenProps) {
       style={{paddingVertical: 24}}
       ListHeaderComponent={<Text style={{fontSize: 16, opacity: 0.8, marginVertical: 8, marginHorizontal: 8, textAlign: "center"}}>Isles Financial Solutions (IFS) is a financial health service for low to moderate income individuals. IFS tailor’s financial solutions to meet your goals and needs with our innovative approach.</Text>}
       ListFooterComponent={
-      <View style={[styles.itemContainer, { backgroundColor: theme.surface, width: "98%"}]}>
+      <View style={[styles.itemContainer, { backgroundColor: theme.surface, width: "98%", height: 180}]}>
         <TouchableOpacity onPress={() => navigation.navigate('AboutContact')}>
             <Image style={{height: 100, width: "100%", marginVertical: 14}} source={require('../assets/images/1480796.png')} resizeMode="contain"/>
           <Text style={styles.itemName}>About/Contact Us</Text>

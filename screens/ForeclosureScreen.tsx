@@ -12,6 +12,8 @@ import { useSafeAreaInsets } from 'react-native-safe-area-context';
 import Colors from '../constants/Colors';
 import MortgageLoan from '../assets/images/mortgage-loan.svg'
 import { Scroller } from '../components/Scroller';
+import { Asset } from 'expo-asset';
+import ForSaleImg from '../assets/images/undraw_For_sale_re_egkk.svg'
 type CustomButtonProps = {
     title?: string,
     onPress?: () => void;
@@ -32,13 +34,13 @@ export default function ForeclosureScreen({navigation}: StackScreenProps<MainSta
   return (
     <Scroller>
       <View style={{backgroundColor: Colors[colorScheme!]["surface"], borderRadius: 10, paddingVertical: 20, paddingHorizontal: 14}}>
-        <BuyHouseImg width={350} height={100} style={{marginVertical: 20}}/>
+        <ForSaleImg width={350} height={100} style={{marginVertical: 20}}/>
         <Text style={{opacity: 0.6, marginVertical: 8}}>Want to get to stop foreclosure and learn about your options?</Text>
         <Text style={styles.baseText}>We are a HUD-certified counseling agency and can make sure you know and understand all of your options, should you ever feel your financial situation threatens your home. Foreclosure prevention can be an overwhelming subject to tackle on your own when struggling to make mortgage payments on your home. 
 IFS housing counselors can help guide the way. We are readily available to help you make sense of it all.
 </Text>
       </View>
-      <TouchableOpacity style={{backgroundColor: Colors[colorScheme!]["surface"], borderRadius: 10, paddingVertical: 20, paddingHorizontal: 14, marginVertical: 10, width: "100%"}} onPress={() => navigation.navigate('WebViewScreen', {url: "http://expo.io"})}>
+      <TouchableOpacity style={{backgroundColor: Colors[colorScheme!]["surface"], borderRadius: 10, paddingVertical: 20, paddingHorizontal: 14, marginVertical: 10, width: "100%"}} onPress={() => navigation.navigate('PdfReaderScreen', {uri: Asset.fromModule(require('../assets/pdfs/HomeownersGuide.pdf')).uri, documentTitle: "Homeowner's Guide to Success"})}>
         <MortgageLoan width="100%" height={150}/>
         <Text style={[styles.title, {paddingHorizontal: 14}]}>Homeowner's Guide to Success</Text>
       </TouchableOpacity>

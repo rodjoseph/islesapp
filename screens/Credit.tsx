@@ -6,6 +6,7 @@ import Section from '../components/Surface';
 import { View, Text } from '../components/Themed';
 import Colors from '../constants/Colors';
 import CreditScoreImg from '../assets/images/speedometer.svg'
+import CalcImg from '../assets/images/calc.svg'
 import { StackNavigationProp, StackScreenProps, useHeaderHeight } from '@react-navigation/stack';
 import { Scroller } from '../components/Scroller';
 import { MainStackParamList } from '../types';
@@ -28,6 +29,10 @@ export default function CreditScreen({navigation} : CreditScreenProps) {
       <TouchableOpacity style={{backgroundColor: Colors[colorScheme!]["surface"], borderRadius: 10, paddingVertical: 20, paddingHorizontal: 14, marginVertical: 10, width: "100%"}} onPress={() => navigation.navigate('HowCreditScoresCalculated')}>
         <CreditScoreImg width={350} height={100} style={{marginVertical: 20}}/>
         <Text style={[styles.title, {paddingHorizontal: 14}]}>How Credit Scores Are Calculated</Text>
+      </TouchableOpacity>
+      <TouchableOpacity style={{backgroundColor: Colors[colorScheme!]["surface"], borderRadius: 10, paddingVertical: 20, paddingHorizontal: 14, marginVertical: 10, width: "100%"}} onPress={() => navigation.navigate('CardGameScreen')}>
+        <CalcImg width={350} height={100} style={{marginVertical: 20}}/>
+        <Text style={[styles.title, {paddingHorizontal: 14}]}>Learn about Credit (interactive)</Text>
       </TouchableOpacity>
     </Scroller>
     )
