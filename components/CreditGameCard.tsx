@@ -7,17 +7,11 @@ import { StyleSheet } from 'react-native'
 import { ListRenderItem } from "react-native";
 
 export const renderCard: ListRenderItem<CreditSlideContent> = ({item}) => {
-
-    const card = useRef<CardFlip>(null);
-
     return(
-        <>
-        <CardFlip style={styles.cardContainer} ref={card} >
-            <TouchableOpacity style={styles.card} onPress={() => card.current?.flip()} ><Text>{item.front}</Text></TouchableOpacity>
-            <TouchableOpacity style={styles.card} onPress={() => card.current?.flip()} ><Text>{item.back}</Text></TouchableOpacity>
+        <CardFlip style={styles.cardContainer}>
+            <TouchableOpacity style={styles.card} ><Text>{item.front}</Text></TouchableOpacity>
+            <TouchableOpacity style={styles.card}><Text>{item.back}</Text></TouchableOpacity>
         </CardFlip>
-        <Text>{item.front}</Text>
-        </>
     );
 }
 

@@ -1,8 +1,7 @@
 import * as React from 'react';
 import { View as DefaultView, TextInput as DefaultTextInput} from 'react-native';
 import { Text as DefaultText } from 'react-native-ui-lib'
-import { Text } from 'react-native-ui-lib/generatedTypes/components/text';
-
+import { Text as RNText } from 'react-native'
 import Colors from '../constants/Colors';
 import useColorScheme from '../hooks/useColorScheme';
 
@@ -25,7 +24,7 @@ type ThemeProps = {
   darkColor?: string;
 };
 
-export type TextProps = ThemeProps & Text['props'];
+export type TextProps = ThemeProps & RNText['props'];
 export type TextInputProps = ThemeProps & DefaultTextInput['props'];
 export type ViewProps = ThemeProps & DefaultView['props'];
 
