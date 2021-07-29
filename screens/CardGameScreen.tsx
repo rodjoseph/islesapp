@@ -10,16 +10,23 @@ import { StackNavigationProp, StackScreenProps, useHeaderHeight } from '@react-n
 import { Scroller } from '../components/Scroller';
 import { MainStackParamList } from '../types';
 import { slides } from '../constants/CreditSlides';
-import { renderCard } from '../components/CreditGameCard';
-
+import GameCard from '../components/CreditGameCard';
 type CardGameScreenProps = StackScreenProps<MainStackParamList, 'CardGameScreen'>
 
 export default function CardGameScreen({navigation} : CardGameScreenProps) {
   return(
-  <View>
+  <View style={styles.container}>
     <FlatList
       data={slides}
-      renderItem={renderCard}
+      renderItem={({item}) => 
+        <GameCard front={item.front} back={item.back}/>
+      }
+      ListHeaderComponent={() => 
+        <View>
+      <Text style={styles.title}>No Savings, Poor Credit: Why Does It Matter?</Text>
+      <Text>Flip a card to learn more about the topic.</Text>
+      </View>
+    }
     />
   </View>
   )
@@ -27,10 +34,7 @@ export default function CardGameScreen({navigation} : CardGameScreenProps) {
 
 const styles = StyleSheet.create({
     container: {
-      flex: 1,
       paddingHorizontal: 14,
-      alignItems: 'center',
-      justifyContent: 'center',
     },
     title: {
       fontSize: 26,

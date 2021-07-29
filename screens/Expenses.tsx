@@ -1,17 +1,18 @@
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import React from 'react';
-import { ListRenderItem} from 'react-native';
+import { ListRenderItem, View} from 'react-native';
 import { Alert } from 'react-native';
 import { FlatList, TouchableOpacity } from 'react-native-gesture-handler';
 import {FontAwesome5} from '@expo/vector-icons'
-import {Colors, FloatingButton, ListItem, MaskedInput, Modal, Picker, TextField, View, Text} from 'react-native-ui-lib';
+import {Colors, FloatingButton, ListItem, MaskedInput, Picker, TextField, Text, Modal} from 'react-native-ui-lib';
 import { SafeAreaView } from 'react-native-safe-area-context';
+import { Icon, TopNavigationAction} from '@ui-kitten/components';
+// import { Scroller } from '../components/Scroller';
 
-type TrackerItemType = "Saving" | "Expense" | "Income"
 type TrackerItem = {
     amount: string,
     name: string
-    type: TrackerItemType
+    type: string
 }
 
 const TRACKERITEM_TYPE_OPTIONS = [
@@ -51,16 +52,17 @@ export const TrackerItemModal = (props: TrackerItemModalProps) => {
         cancelButtonProps={{iconStyle: {tintColor: Colors.orange30}}}
         includeStatusBar
       />
+      <View style={{paddingHorizontal: 16}}>
       <TextField
         title="Name"
         editable
         placeholder="Name"
       />
-      <TextField
+      {/* <TextField
         title="Amount"
         editable
         placeholder="Amount"
-        value={trackerItem?.amount}
+        value={newTrackerItem?.amount}
         onChange={(txt: string) => {
           console.log(txt)
           setErrorMsg(isNaN(parseFloat(txt as string)) ? "Enter number" : "");
@@ -70,24 +72,25 @@ export const TrackerItemModal = (props: TrackerItemModalProps) => {
         error={errorMsg}
         errorColor="red"
         prefix="$"
-      />
+      /> */}
       <Picker
         title="Type"
         placeholder="Pick a Type"
         useNativePicker
-        value={trackerItem?.type}
-        onChange={(nativePickerValue: string) => setNewTrackerItem({...newTrackerItem!, type: nativePickerValue as TrackerItemType})}
+        value={newTrackerItem?.type}
+        onChange={(nativePickerValue: string) => setNewTrackerItem({...newTrackerItem!, type: nativePickerValue as string})}
         containerStyle={{marginTop: 20}}
       >
         {TRACKERITEM_TYPE_OPTIONS.map(option => (
           <Picker.Item key={option.value} value={option.value} label={option.label}/>
         ))}
       </Picker>
+      </View>
       </SafeAreaView>
     </Modal>
   )
 }
-export const Expenses = () => {
+export const Expenses2 = () => {
 
     const [trackerItems, setTrackerItems] = React.useState<TrackerItem[]>()
     const _renderItem: ListRenderItem<TrackerItem> = ({item}) => {
@@ -123,7 +126,8 @@ export const Expenses = () => {
     const storeData = async (value: object
       ) => {
       try {
-        const jsonValue = JSON.stringify(value)
+        const newTrackerItems = [...trackerItems!, value]
+        const jsonValue = JSON.stringify(newTrackerItems)
         await AsyncStorage.setItem('@items', jsonValue)
       } catch (e) {
         // saving error
@@ -146,8 +150,12 @@ export const Expenses = () => {
     }, [])
 
     return(
-      <View>
-        <FlatList data={trackerItems} renderItem={_renderItem} showsVerticalScrollIndicator={false}/>       
+      <>
+        <Text>hi</Text>
+        <Text>hi</Text>
+        <Text>hi</Text>
+        <Text>hi</Text>
+        <Text>hi</Text>
         <FloatingButton
         visible
         button={{
@@ -160,6 +168,16 @@ export const Expenses = () => {
         // withoutAnimation
       />
       <TrackerItemModal visible={modalVisible} onClose={() => setModalVisible(false)} onSubmit={() => {}}/>
-      </View>
+      </>
     )
 }  
+
+const ExpensesScreen = () => {
+  return(
+    <View style={{flex: 1, height: '100%'}}>
+        <Expenses2/>
+    </View>
+  )
+}
+
+export default ExpensesScreen
