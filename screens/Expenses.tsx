@@ -1,183 +1,304 @@
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import React from 'react';
-import { ListRenderItem, View} from 'react-native';
+import { ListRenderItem, View, StyleSheet } from 'react-native';
 import { Alert } from 'react-native';
 import { FlatList, TouchableOpacity } from 'react-native-gesture-handler';
 import {FontAwesome5} from '@expo/vector-icons'
-import {Colors, FloatingButton, ListItem, MaskedInput, Picker, TextField, Text, Modal} from 'react-native-ui-lib';
+import {FloatingButton, ListItem, MaskedInput, Picker, TextField, Modal} from 'react-native-ui-lib';
 import { SafeAreaView } from 'react-native-safe-area-context';
 import { Icon, TopNavigationAction} from '@ui-kitten/components';
+import CurrencyInput from 'react-native-currency-input';
+
 // import { Scroller } from '../components/Scroller';
+import { Text } from '../components/Themed'
+import { Scroller } from '../components/Scroller';
+import Colors from '../constants/Colors';
+import useColorScheme from '../hooks/useColorScheme';
+import { Button } from 'react-native-elements';
 
-type TrackerItem = {
-    amount: string,
-    name: string
-    type: string
+
+type BudgetInfo = {
+  salaryAndWages: number,
+  otherIncome: number,
+  housingExpenses: number,
+  foodExpenses: number,
+  transportationExpenses: number,
+  childCareExpenses: number,
+  loanExpenses: number,
+  insuranceExpenses: number,
+  entertainmentExpenses: number,
+  personalCareExpenses: number,
+  petsExpenses: number,
+  otherExpenses: number,
+  emergencyFunds: number,
+  retirementExpenses: number,
+  investmentExpenses: number,
+  otherSavings: number
 }
-
-const TRACKERITEM_TYPE_OPTIONS = [
-  {label: 'Saving', value: 'Saving'},
-  {label: 'Expense', value: 'Expense'},
-  {label: 'Income', value: 'Income'},
-];
-
-interface TrackerItemModalProps {
-  visible: boolean,
-  onClose: () => void,
-  trackerItem?: TrackerItem
-  onSubmit: (trackerItem: TrackerItem) => void
-}
-
-export const TrackerItemModal = (props: TrackerItemModalProps) => {
-  const {
-    visible,
-    onClose,
-    trackerItem,
-    onSubmit
-  } = props;
-
-  const [newTrackerItem, setNewTrackerItem] = React.useState<TrackerItem>()
-  const [errorMsg, setErrorMsg] = React.useState("")
-  return(
-    <Modal visible={visible} onRequestClose={onClose}>
-      <SafeAreaView>
-      <Modal.TopBar
-        title="Tracker Item"
-        onCancel={onClose}
-        onDone={() => {
-          Alert.alert(JSON.stringify(newTrackerItem));
-          onClose()
-        }}
-        doneButtonProps={{color: Colors.orange30}}
-        cancelButtonProps={{iconStyle: {tintColor: Colors.orange30}}}
-        includeStatusBar
-      />
-      <View style={{paddingHorizontal: 16}}>
-      <TextField
-        title="Name"
-        editable
-        placeholder="Name"
-      />
-      {/* <TextField
-        title="Amount"
-        editable
-        placeholder="Amount"
-        value={newTrackerItem?.amount}
-        onChange={(txt: string) => {
-          console.log(txt)
-          setErrorMsg(isNaN(parseFloat(txt as string)) ? "Enter number" : "");
-          setNewTrackerItem({...newTrackerItem!, amount: txt as string})
-        }}
-        enableErrors
-        error={errorMsg}
-        errorColor="red"
-        prefix="$"
-      /> */}
-      <Picker
-        title="Type"
-        placeholder="Pick a Type"
-        useNativePicker
-        value={newTrackerItem?.type}
-        onChange={(nativePickerValue: string) => setNewTrackerItem({...newTrackerItem!, type: nativePickerValue as string})}
-        containerStyle={{marginTop: 20}}
-      >
-        {TRACKERITEM_TYPE_OPTIONS.map(option => (
-          <Picker.Item key={option.value} value={option.value} label={option.label}/>
-        ))}
-      </Picker>
-      </View>
-      </SafeAreaView>
-    </Modal>
-  )
-}
-export const Expenses2 = () => {
-
-    const [trackerItems, setTrackerItems] = React.useState<TrackerItem[]>()
-    const _renderItem: ListRenderItem<TrackerItem> = ({item}) => {
-        return(
-          <ListItem
-          height={77.5}
-          containerStyle={{paddingHorizontal: 14}}
-          onPress={() => Alert.alert(`pressed on order #${item.name + 1}`)}
-        >
-          {/* <ListItem.Part left>
-            <Animatable.Image
-              source={{uri: row.mediaUrl}}
-              style={styles.image}
-              {...imageAnimationProps}
-            />
-          </ListItem.Part> */}
-          <ListItem.Part middle column containerStyle={{paddingRight: 17}}>
-            <ListItem.Part containerStyle={{marginBottom: 3}}>
-              <Text text70 style={{flex: 1, marginRight: 10}} numberOfLines={1}>{item.name}</Text>
-              <Text dark10 text70 style={{marginTop: 2}}>{item.amount}</Text>
-            </ListItem.Part>
-            <ListItem.Part>
-              <Text text90 numberOfLines={1}>{item.type}</Text>
-            </ListItem.Part>
-          </ListItem.Part>
-        </ListItem>
-        )
-    }
-
-    const [modalVisible, setModalVisible] = React.useState(false)
-    
-    // Store the selected item in async storage
-    const storeData = async (value: object
-      ) => {
-      try {
-        const newTrackerItems = [...trackerItems!, value]
-        const jsonValue = JSON.stringify(newTrackerItems)
-        await AsyncStorage.setItem('@items', jsonValue)
-      } catch (e) {
-        // saving error
-        Alert.alert("Error storing items.")
-      }
-    }
-
-    // Get the items from async storage
-    const getData = async () => {
-        try {
-            const jsonValue = await AsyncStorage.getItem('@storage_Key')
-            setTrackerItems(jsonValue != null ? JSON.parse(jsonValue) : null);
-        } catch(e) {
-          Alert.alert("Error retreiving items.")
-        }
-    }
-
-    React.useEffect(() => {
-      getData()
-    }, [])
-
-    return(
-      <>
-        <Text>hi</Text>
-        <Text>hi</Text>
-        <Text>hi</Text>
-        <Text>hi</Text>
-        <Text>hi</Text>
-        <FloatingButton
-        visible
-        button={{
-          label: 'Add Expense',
-          onPress: () => setModalVisible(true)
-        }}
-        hideBackgroundOverlay
-        // bottomMargin={80}
-        // hideBackgroundOverlay
-        // withoutAnimation
-      />
-      <TrackerItemModal visible={modalVisible} onClose={() => setModalVisible(false)} onSubmit={() => {}}/>
-      </>
-    )
-}  
-
 const ExpensesScreen = () => {
+  const colorScheme = useColorScheme()
+  const [budgetInfo, setBudgetInfo] = React.useState<BudgetInfo>({
+    salaryAndWages: 0,
+    otherIncome: 0,
+    housingExpenses: 0,
+    foodExpenses: 0,
+    transportationExpenses: 0,
+    childCareExpenses: 0,
+    loanExpenses: 0,
+    insuranceExpenses: 0,
+    entertainmentExpenses: 0,
+    personalCareExpenses: 0,
+    petsExpenses: 0,
+    otherExpenses: 0,
+    emergencyFunds: 0,
+    retirementExpenses: 0,
+    investmentExpenses: 0,
+    otherSavings: 0
+  })
+
+  const styles = StyleSheet.create({
+    currencyInput: {
+      marginTop: 10, marginBottom: 10, marginHorizontal: 10, marginVertical: 10, fontSize: 20, borderColor: Colors[colorScheme!]["text"], borderWidth: 1, padding: 8, borderRadius: 5, color: Colors[colorScheme!]["text"]}
+          
+  })
+
   return(
-    <View style={{flex: 1, height: '100%'}}>
-        <Expenses2/>
-    </View>
+    <Scroller>
+      <View style={{backgroundColor: Colors[colorScheme!]["surface"], borderRadius: 10, paddingVertical: 20, paddingHorizontal: 14, marginVertical: 10}}>
+        <Text style={{fontSize: 28, fontWeight: 'bold'}}>Monthly Income</Text>
+        <Text>Salary and wages</Text>
+        <CurrencyInput
+          value={budgetInfo?.salaryAndWages ?? 0}
+          style={styles.currencyInput}
+          //onChangeValue={setBudgetInfo(value => setBudgetInfo({...budgetInfo!, salaryAndWages: value}))}
+          prefix="$"
+          delimiter=","
+          separator="."
+          precision={2}
+          onChangeText={(formattedValue) => {
+            console.log(formattedValue); // $2,310.46
+          }}
+        />
+        <Text>Other income</Text>
+        <CurrencyInput
+          value={budgetInfo?.salaryAndWages ?? 0}
+          style={styles.currencyInput}
+          //onChangeValue={setBudgetInfo(value => setBudgetInfo({...budgetInfo!, salaryAndWages: value}))}
+          prefix="$"
+          delimiter=","
+          separator="."
+          precision={2}
+          onChangeText={(formattedValue) => {
+            console.log(formattedValue); // $2,310.46
+          }}
+        />
+        
+      </View>
+      <View style={{backgroundColor: Colors[colorScheme!]["surface"], borderRadius: 10, paddingVertical: 20, paddingHorizontal: 14, marginVertical: 10}}>
+        <Text style={{fontSize: 28, fontWeight: 'bold'}}>Monthly Income</Text>
+        <Text>Housings</Text>
+        <CurrencyInput
+          value={budgetInfo?.salaryAndWages ?? 0}
+          style={styles.currencyInput}
+          //onChangeValue={setBudgetInfo(value => setBudgetInfo({...budgetInfo!, salaryAndWages: value}))}
+          prefix="$"
+          delimiter=","
+          separator="."
+          precision={2}
+          onChangeText={(formattedValue) => {
+            console.log(formattedValue); // $2,310.46
+          }}
+        />
+        <Text>Food</Text>
+        <CurrencyInput
+          value={budgetInfo?.salaryAndWages ?? 0}
+          style={styles.currencyInput}
+          //onChangeValue={setBudgetInfo(value => setBudgetInfo({...budgetInfo!, salaryAndWages: value}))}
+          prefix="$"
+          delimiter=","
+          separator="."
+          precision={2}
+          onChangeText={(formattedValue) => {
+            console.log(formattedValue); // $2,310.46
+          }}
+        />
+        <Text>Transportation</Text>
+        <CurrencyInput
+          value={budgetInfo?.salaryAndWages ?? 0}
+          style={styles.currencyInput}
+          //onChangeValue={setBudgetInfo(value => setBudgetInfo({...budgetInfo!, salaryAndWages: value}))}
+          prefix="$"
+          delimiter=","
+          separator="."
+          precision={2}
+          onChangeText={(formattedValue) => {
+            console.log(formattedValue); // $2,310.46
+          }}
+        />
+        <Text>Child care</Text>
+        <CurrencyInput
+          value={budgetInfo?.salaryAndWages ?? 0}
+          style={styles.currencyInput}
+          //onChangeValue={setBudgetInfo(value => setBudgetInfo({...budgetInfo!, salaryAndWages: value}))}
+          prefix="$"
+          delimiter=","
+          separator="."
+          precision={2}
+          onChangeText={(formattedValue) => {
+            console.log(formattedValue); // $2,310.46
+          }}
+        />
+        <Text>Credit cards and loans</Text>
+        <CurrencyInput
+          value={budgetInfo?.salaryAndWages ?? 0}
+          style={styles.currencyInput}
+          //onChangeValue={setBudgetInfo(value => setBudgetInfo({...budgetInfo!, salaryAndWages: value}))}
+          prefix="$"
+          delimiter=","
+          separator="."
+          precision={2}
+          onChangeText={(formattedValue) => {
+            console.log(formattedValue); // $2,310.46
+          }}
+        />
+        <Text>Insurance</Text>
+        <CurrencyInput
+          value={budgetInfo?.salaryAndWages ?? 0}
+          style={styles.currencyInput}
+          //onChangeValue={setBudgetInfo(value => setBudgetInfo({...budgetInfo!, salaryAndWages: value}))}
+          prefix="$"
+          delimiter=","
+          separator="."
+          precision={2}
+          onChangeText={(formattedValue) => {
+            console.log(formattedValue); // $2,310.46
+          }}
+        />
+        <Text>Entertainment</Text>
+        <CurrencyInput
+          value={budgetInfo?.salaryAndWages ?? 0}
+          style={styles.currencyInput}
+          //onChangeValue={setBudgetInfo(value => setBudgetInfo({...budgetInfo!, salaryAndWages: value}))}
+          prefix="$"
+          delimiter=","
+          separator="."
+          precision={2}
+          onChangeText={(formattedValue) => {
+            console.log(formattedValue); // $2,310.46
+          }}
+        />
+        <Text>Retirement</Text>
+        <CurrencyInput
+          value={budgetInfo?.salaryAndWages ?? 0}
+          style={styles.currencyInput}
+          //onChangeValue={setBudgetInfo(value => setBudgetInfo({...budgetInfo!, salaryAndWages: value}))}
+          prefix="$"
+          delimiter=","
+          separator="."
+          precision={2}
+          onChangeText={(formattedValue) => {
+            console.log(formattedValue); // $2,310.46
+          }}
+        />
+        <Text>Personal care</Text>
+        <CurrencyInput
+          value={budgetInfo?.salaryAndWages ?? 0}
+          style={styles.currencyInput}
+          //onChangeValue={setBudgetInfo(value => setBudgetInfo({...budgetInfo!, salaryAndWages: value}))}
+          prefix="$"
+          delimiter=","
+          separator="."
+          precision={2}
+          onChangeText={(formattedValue) => {
+            console.log(formattedValue); // $2,310.46
+          }}
+        />
+        <Text>Pets</Text>
+        <CurrencyInput
+          value={budgetInfo?.salaryAndWages ?? 0}
+          style={styles.currencyInput}
+          //onChangeValue={setBudgetInfo(value => setBudgetInfo({...budgetInfo!, salaryAndWages: value}))}
+          prefix="$"
+          delimiter=","
+          separator="."
+          precision={2}
+          onChangeText={(formattedValue) => {
+            console.log(formattedValue); // $2,310.46
+          }}
+        />
+        <Text>Other</Text>
+        <CurrencyInput
+          value={budgetInfo?.salaryAndWages ?? 0}
+          style={styles.currencyInput}
+          //onChangeValue={setBudgetInfo(value => setBudgetInfo({...budgetInfo!, salaryAndWages: value}))}
+          prefix="$"
+          delimiter=","
+          separator="."
+          precision={2}
+          onChangeText={(formattedValue) => {
+            console.log(formattedValue); // $2,310.46
+          }}
+        />
+      </View>
+      <View style={{backgroundColor: Colors[colorScheme!]["surface"], borderRadius: 10, paddingVertical: 20, paddingHorizontal: 14, marginVertical: 10}}>
+        <Text style={{fontSize: 28, fontWeight: 'bold'}}>Monthly Savings</Text>
+        <Text>Emergency fund</Text>
+        <CurrencyInput
+          value={budgetInfo?.salaryAndWages ?? 0}
+          style={styles.currencyInput}
+          //onChangeValue={setBudgetInfo(value => setBudgetInfo({...budgetInfo!, salaryAndWages: value}))}
+          prefix="$"
+          delimiter=","
+          separator="."
+          precision={2}
+          onChangeText={(formattedValue) => {
+            console.log(formattedValue); // $2,310.46
+          }}
+        />
+        <Text>Retirement</Text>
+        <CurrencyInput
+          value={budgetInfo?.salaryAndWages ?? 0}
+          style={styles.currencyInput}
+          //onChangeValue={setBudgetInfo(value => setBudgetInfo({...budgetInfo!, salaryAndWages: value}))}
+          prefix="$"
+          delimiter=","
+          separator="."
+          precision={2}
+          onChangeText={(formattedValue) => {
+            console.log(formattedValue); // $2,310.46
+          }}
+        />
+        <Text>Investments</Text>
+        <CurrencyInput
+          value={budgetInfo?.salaryAndWages ?? 0}
+          style={styles.currencyInput}
+          //onChangeValue={setBudgetInfo(value => setBudgetInfo({...budgetInfo!, salaryAndWages: value}))}
+          prefix="$"
+          delimiter=","
+          separator="."
+          precision={2}
+          onChangeText={(formattedValue) => {
+            console.log(formattedValue); // $2,310.46
+          }}
+        /><Text>Other</Text>
+        <CurrencyInput
+          value={budgetInfo?.salaryAndWages ?? 0}
+          style={styles.currencyInput}
+          //onChangeValue={setBudgetInfo(value => setBudgetInfo({...budgetInfo!, salaryAndWages: value}))}
+          prefix="$"
+          delimiter=","
+          separator="."
+          precision={2}
+          onChangeText={(formattedValue) => {
+            console.log(formattedValue); // $2,310.46
+          }}
+        />
+      </View>
+      <Button title='Submit' onPress={()=>{}}/>
+
+    </Scroller>
   )
 }
 
 export default ExpensesScreen
+

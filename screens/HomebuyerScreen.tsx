@@ -63,7 +63,7 @@ export default function HomebuyerScreen({navigation}: StackScreenProps<MainStack
   const headerHeight = useHeaderHeight()
   return (
     <Scroller>
-      <View style={{backgroundColor: Colors[colorScheme!]["surface"], borderRadius: 10, paddingVertical: 20, paddingHorizontal: 14, marginVertical: 20 }}>
+      <View style={{backgroundColor: Colors[colorScheme!]["surface"], borderRadius: 10, paddingVertical: 20, paddingHorizontal: 14, marginVertical: 5 }}>
         <HousesImg width={350} height={100} style={{marginVertical: 20}}/>
         <Text style={{opacity: 0.6, marginVertical: 8}}>Want to buy your first home?</Text>
         <Text style={styles.baseText}>The first year of homeownership is often the most challenging. Our Pre-Purchase Counseling Program will help you prepare for the added expenses and responsibilities of owning a home, so you know what to expect, and where to turn for help. From setting a realistic household budget and reviewing credit reports, to explaining the home-ownership process and lending requirements, our counselors can help guide the way. </Text>

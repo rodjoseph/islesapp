@@ -33,7 +33,7 @@ export default function ForeclosureScreen({navigation}: StackScreenProps<MainSta
   const colorScheme = useColorScheme()
   return (
     <Scroller>
-      <View style={{backgroundColor: Colors[colorScheme!]["surface"], borderRadius: 10, paddingVertical: 20, paddingHorizontal: 14}}>
+      <View style={{backgroundColor: Colors[colorScheme!]["surface"], borderRadius: 10, paddingVertical: 20, paddingHorizontal: 14, marginVertical: 10}}>
         <ForSaleImg width={350} height={100} style={{marginVertical: 20}}/>
         <Text style={{opacity: 0.6, marginVertical: 8}}>Want to get to stop foreclosure and learn about your options?</Text>
         <Text style={styles.baseText}>We are a HUD-certified counseling agency and can make sure you know and understand all of your options, should you ever feel your financial situation threatens your home. Foreclosure prevention can be an overwhelming subject to tackle on your own when struggling to make mortgage payments on your home. 

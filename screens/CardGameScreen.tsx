@@ -14,17 +14,20 @@ import GameCard from '../components/CreditGameCard';
 type CardGameScreenProps = StackScreenProps<MainStackParamList, 'CardGameScreen'>
 
 export default function CardGameScreen({navigation} : CardGameScreenProps) {
+  const insets = useSafeAreaInsets();
   return(
-  <View style={styles.container}>
+  <View style={[styles.container]}>
     <FlatList
+    contentContainerStyle={{paddingBottom: insets.bottom}}
       data={slides}
+      showsVerticalScrollIndicator={false}
       renderItem={({item}) => 
         <GameCard front={item.front} back={item.back}/>
       }
       ListHeaderComponent={() => 
         <View>
       <Text style={styles.title}>No Savings, Poor Credit: Why Does It Matter?</Text>
-      <Text>Flip a card to learn more about the topic.</Text>
+      <Text style={{opacity: 0.6}}>Flip a card to learn more about the topic.</Text>
       </View>
     }
     />
