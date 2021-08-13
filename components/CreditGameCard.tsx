@@ -4,14 +4,12 @@ import CardFlip from 'react-native-card-flip';
 import { TouchableOpacity } from "react-native-gesture-handler";
 import { Text, View } from '../components/Themed'
 import { StyleSheet } from 'react-native'
-import { ListRenderItem } from "react-native";
-
-
 
 interface GameCardProps {
-    front: string;
-    back: string;
+  front: string;
+  back: string;
 }
+
 const GameCard = ({front, back} : GameCardProps) => {
     const card = useRef<CardFlip>(null);
     return (
