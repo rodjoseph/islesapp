@@ -1,24 +1,22 @@
 import * as React from "react";
 import PDFReader from 'rn-pdf-reader-js'
 import { MainStackParamList } from '../types';
-import { WebView }  from 'react-native-webview';
 import { StackScreenProps } from '@react-navigation/stack';
 import { StyleSheet } from 'react-native';
 
 type PdfReaderScreenProps = StackScreenProps<MainStackParamList, 'PdfReaderScreen'>
 
 export default function PdfReaderScreen({route, navigation} : PdfReaderScreenProps) {
-
-    React.useEffect(() => {
-        navigation.setOptions({headerTitle: route.params.documentTitle? route.params.documentTitle : ""})
-    }, [])
-    return(
-        <PDFReader
-        source={{
-          uri: route.params.uri,
-        }}
-      />
-    )
+  React.useEffect(() => {
+      navigation.setOptions({headerTitle: route.params.documentTitle? route.params.documentTitle : ""})
+  }, [])
+  return(
+      <PDFReader
+      source={{
+        uri: route.params.uri,
+      }}
+    />
+  )
 }
 
 const styles = StyleSheet.create({

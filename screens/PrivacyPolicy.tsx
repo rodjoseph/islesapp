@@ -1,16 +1,12 @@
 import * as React from 'react';
 import { StyleSheet, Linking, Image, useColorScheme } from 'react-native';
-import { Button } from 'react-native-elements'
-import EditScreenInfo from '../components/EditScreenInfo';
 import { Text, View } from '../components/Themed';
-import { NavigationContainer, StackActions } from '@react-navigation/native';
 import { createStackNavigator, StackScreenProps} from '@react-navigation/stack';
 import Colors from '../constants/Colors';
 import { useSafeAreaInsets } from 'react-native-safe-area-context';
-import { ScrollView, TouchableOpacity } from 'react-native-gesture-handler';
 import { Scroller } from '../components/Scroller';
-import Markdown from 'react-native-markdown-display';
 import { MainStackParamList } from '../types';
+
 const Stack = createStackNavigator();
 
 type PrivacyPolicyScreenProps = StackScreenProps<MainStackParamList, 'PrivacyPolicy'>
