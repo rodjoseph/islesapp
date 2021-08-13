@@ -1,18 +1,15 @@
 import { createStackNavigator } from "@react-navigation/stack";
 import HomebuyerScreen from "../screens/HomebuyerScreen";
 import { HomeScreen } from "../screens/HomeScreen";
-import { MortgageCalculatorScreen } from "../screens/MortgageCalculatorScreen";
 import { MainStackParamList } from "../types";
 import * as React from 'react';
 import { Image } from 'react-native'
 import { ContactScreen } from "../screens/AboutContact";
-import BudgetCalculatorScreen from "../screens/BudgetCalculatorScreen";
 import ForeclosureScreen from "../screens/ForeclosureScreen";
 import BudgetScreen from "../screens/BudgetScreen";
 import CreditScreen from "../screens/Credit";
 import { PrivacyPolicyScreen } from "../screens/PrivacyPolicy";
 import { HowCreditScoresCalculatedScreen } from "../screens/HowCreditScoresCalculated";
-import HomeownersGuideScreen from "../screens/WebViewScreen";
 import WebViewScreen from "../screens/WebViewScreen";
 import PdfReaderScreen from "../screens/PdfReaderScreen";
 import CardGameScreen from "../screens/CardGameScreen";
@@ -39,7 +36,6 @@ export function MainStackNavigator() {
         component={HomeScreen}
         options={{ headerTitle: props => <LogoTitle  />,}}
       />
-      <MainStack.Screen name="Mortgage" component={MortgageCalculatorScreen} options={{}}></MainStack.Screen>
       <MainStack.Screen name="Homebuying" component={HomebuyerScreen} options={{}}></MainStack.Screen>
       <MainStack.Screen name="Foreclosure" component={ForeclosureScreen} options={{}}></MainStack.Screen>
       <MainStack.Screen name="Budget" component={BudgetScreen} options={{}}></MainStack.Screen>
