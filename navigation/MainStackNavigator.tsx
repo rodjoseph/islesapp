@@ -1,5 +1,4 @@
 import { createStackNavigator } from "@react-navigation/stack";
-import { DebtCalculatorScreen } from "../screens/DebtCalculatorScreen";
 import HomebuyerScreen from "../screens/HomebuyerScreen";
 import { HomeScreen } from "../screens/HomeScreen";
 import { MortgageCalculatorScreen } from "../screens/MortgageCalculatorScreen";
@@ -18,6 +17,7 @@ import WebViewScreen from "../screens/WebViewScreen";
 import PdfReaderScreen from "../screens/PdfReaderScreen";
 import CardGameScreen from "../screens/CardGameScreen";
 import ExpensesScreen from "../screens/Expenses";
+import ExpensesReportScreen from "../screens/ExpenseReport";
 
 const MainStack = createStackNavigator<MainStackParamList>();
 
@@ -40,7 +40,6 @@ export function MainStackNavigator() {
         options={{ headerTitle: props => <LogoTitle  />,}}
       />
       <MainStack.Screen name="Mortgage" component={MortgageCalculatorScreen} options={{}}></MainStack.Screen>
-      <MainStack.Screen name="Debt" component={DebtCalculatorScreen} options={{}}></MainStack.Screen>
       <MainStack.Screen name="Homebuying" component={HomebuyerScreen} options={{}}></MainStack.Screen>
       <MainStack.Screen name="Foreclosure" component={ForeclosureScreen} options={{}}></MainStack.Screen>
       <MainStack.Screen name="Budget" component={BudgetScreen} options={{}}></MainStack.Screen>
@@ -52,6 +51,7 @@ export function MainStackNavigator() {
       <MainStack.Screen name="PdfReaderScreen" component={PdfReaderScreen}></MainStack.Screen>
       <MainStack.Screen name="CardGameScreen" component={CardGameScreen} options={{headerTitle: "Learn About Credit"}}/>
       <MainStack.Screen name="ExpensesScreen" component={ExpensesScreen} options={{headerTitle: "Expenses"}}/>
+      <MainStack.Screen name="ExpensesReportScreen" component={ExpensesReportScreen} options={{headerTitle: "Expenses"}}/>
     </MainStack.Navigator>
   );
 }

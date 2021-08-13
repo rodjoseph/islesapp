@@ -65,7 +65,7 @@ const styles = StyleSheet.create({
     },
     frontText: {
       textAlign: 'center',
-      fontSize: 55,
+      fontSize: 54,
       fontFamily: 'System',
       backgroundColor: 'transparent',
     },

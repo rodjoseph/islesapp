@@ -15,27 +15,13 @@ import { Scroller } from '../components/Scroller';
 import Colors from '../constants/Colors';
 import useColorScheme from '../hooks/useColorScheme';
 import { Button } from 'react-native-elements';
+import { BudgetInfo, MainStackParamList } from '../types';
+import { StackScreenProps } from '@react-navigation/stack';
 
 
-type BudgetInfo = {
-  salaryAndWages: number,
-  otherIncome: number,
-  housingExpenses: number,
-  foodExpenses: number,
-  transportationExpenses: number,
-  childCareExpenses: number,
-  loanExpenses: number,
-  insuranceExpenses: number,
-  entertainmentExpenses: number,
-  personalCareExpenses: number,
-  petsExpenses: number,
-  otherExpenses: number,
-  emergencyFunds: number,
-  retirementExpenses: number,
-  investmentExpenses: number,
-  otherSavings: number
-}
-const ExpensesScreen = () => {
+type ExpensesScreenProps = StackScreenProps<MainStackParamList, 'ExpensesScreen'>
+
+const ExpensesScreen = ({navigation} : ExpensesScreenProps) => {
   const colorScheme = useColorScheme()
   const [budgetInfo, setBudgetInfo] = React.useState<BudgetInfo>({
     salaryAndWages: 0,
@@ -58,8 +44,15 @@ const ExpensesScreen = () => {
 
   const styles = StyleSheet.create({
     currencyInput: {
-      marginTop: 10, marginBottom: 10, marginHorizontal: 10, marginVertical: 10, fontSize: 20, borderColor: Colors[colorScheme!]["text"], borderWidth: 1, padding: 8, borderRadius: 5, color: Colors[colorScheme!]["text"]}
-          
+      marginTop: 10, marginBottom: 10, marginHorizontal: 10, marginVertical: 10, fontSize: 20, 
+      borderColor: Colors[colorScheme!]["text"], borderWidth: 1, padding: 8, 
+      borderRadius: 5, color: Colors[colorScheme!]["text"], 
+      borderTopColor: Colors[colorScheme!]["background"], borderTopWidth: 1, 
+      borderBottomColor: Colors[colorScheme!]["background"], borderBottomWidth: 1, 
+      borderLeftColor: Colors[colorScheme!]["background"], borderLeftWidth: 1,
+      borderRightColor: Colors[colorScheme!]["background"], borderRightWidth: 1,
+      backgroundColor: Colors[colorScheme!]["background"]
+    }
   })
 
   return(
@@ -70,231 +63,180 @@ const ExpensesScreen = () => {
         <CurrencyInput
           value={budgetInfo?.salaryAndWages ?? 0}
           style={styles.currencyInput}
-          //onChangeValue={setBudgetInfo(value => setBudgetInfo({...budgetInfo!, salaryAndWages: value}))}
+          onChangeValue={value => setBudgetInfo({...budgetInfo!, salaryAndWages: value!})}
           prefix="$"
           delimiter=","
           separator="."
           precision={2}
-          onChangeText={(formattedValue) => {
-            console.log(formattedValue); // $2,310.46
-          }}
         />
         <Text>Other income</Text>
         <CurrencyInput
-          value={budgetInfo?.salaryAndWages ?? 0}
+          value={budgetInfo?.otherIncome}
           style={styles.currencyInput}
-          //onChangeValue={setBudgetInfo(value => setBudgetInfo({...budgetInfo!, salaryAndWages: value}))}
+          onChangeValue={value => setBudgetInfo({...budgetInfo!, otherIncome: value!})}
           prefix="$"
           delimiter=","
           separator="."
           precision={2}
-          onChangeText={(formattedValue) => {
-            console.log(formattedValue); // $2,310.46
-          }}
         />
-        
       </View>
       <View style={{backgroundColor: Colors[colorScheme!]["surface"], borderRadius: 10, paddingVertical: 20, paddingHorizontal: 14, marginVertical: 10}}>
         <Text style={{fontSize: 28, fontWeight: 'bold'}}>Monthly Income</Text>
         <Text>Housings</Text>
         <CurrencyInput
-          value={budgetInfo?.salaryAndWages ?? 0}
+          value={budgetInfo?.housingExpenses ?? 0}
           style={styles.currencyInput}
-          //onChangeValue={setBudgetInfo(value => setBudgetInfo({...budgetInfo!, salaryAndWages: value}))}
+          onChangeValue={value => setBudgetInfo({...budgetInfo!, housingExpenses: value!})}
           prefix="$"
           delimiter=","
           separator="."
           precision={2}
-          onChangeText={(formattedValue) => {
-            console.log(formattedValue); // $2,310.46
-          }}
         />
         <Text>Food</Text>
         <CurrencyInput
-          value={budgetInfo?.salaryAndWages ?? 0}
+          value={budgetInfo?.foodExpenses ?? 0}
           style={styles.currencyInput}
-          //onChangeValue={setBudgetInfo(value => setBudgetInfo({...budgetInfo!, salaryAndWages: value}))}
+          onChangeValue={value => setBudgetInfo({...budgetInfo!, foodExpenses: value!})}
           prefix="$"
           delimiter=","
           separator="."
           precision={2}
-          onChangeText={(formattedValue) => {
-            console.log(formattedValue); // $2,310.46
-          }}
         />
         <Text>Transportation</Text>
         <CurrencyInput
-          value={budgetInfo?.salaryAndWages ?? 0}
+          value={budgetInfo?.transportationExpenses ?? 0}
           style={styles.currencyInput}
-          //onChangeValue={setBudgetInfo(value => setBudgetInfo({...budgetInfo!, salaryAndWages: value}))}
+          onChangeValue={value => setBudgetInfo({...budgetInfo!, transportationExpenses: value!})}
           prefix="$"
           delimiter=","
           separator="."
           precision={2}
-          onChangeText={(formattedValue) => {
-            console.log(formattedValue); // $2,310.46
-          }}
         />
         <Text>Child care</Text>
         <CurrencyInput
-          value={budgetInfo?.salaryAndWages ?? 0}
+          value={budgetInfo?.childCareExpenses ?? 0}
           style={styles.currencyInput}
-          //onChangeValue={setBudgetInfo(value => setBudgetInfo({...budgetInfo!, salaryAndWages: value}))}
+          onChangeValue={value => setBudgetInfo({...budgetInfo!, childCareExpenses: value!})}
           prefix="$"
           delimiter=","
           separator="."
           precision={2}
-          onChangeText={(formattedValue) => {
-            console.log(formattedValue); // $2,310.46
-          }}
         />
         <Text>Credit cards and loans</Text>
         <CurrencyInput
-          value={budgetInfo?.salaryAndWages ?? 0}
+          value={budgetInfo?.loanExpenses ?? 0}
           style={styles.currencyInput}
-          //onChangeValue={setBudgetInfo(value => setBudgetInfo({...budgetInfo!, salaryAndWages: value}))}
+          onChangeValue={value => setBudgetInfo({...budgetInfo!, loanExpenses: value!})}
           prefix="$"
           delimiter=","
           separator="."
           precision={2}
-          onChangeText={(formattedValue) => {
-            console.log(formattedValue); // $2,310.46
-          }}
         />
         <Text>Insurance</Text>
         <CurrencyInput
-          value={budgetInfo?.salaryAndWages ?? 0}
+          value={budgetInfo?.insuranceExpenses ?? 0}
           style={styles.currencyInput}
-          //onChangeValue={setBudgetInfo(value => setBudgetInfo({...budgetInfo!, salaryAndWages: value}))}
+          onChangeValue={value => setBudgetInfo({...budgetInfo!, insuranceExpenses: value!})}
           prefix="$"
           delimiter=","
           separator="."
           precision={2}
-          onChangeText={(formattedValue) => {
-            console.log(formattedValue); // $2,310.46
-          }}
         />
         <Text>Entertainment</Text>
         <CurrencyInput
-          value={budgetInfo?.salaryAndWages ?? 0}
+          value={budgetInfo?.entertainmentExpenses ?? 0}
           style={styles.currencyInput}
-          //onChangeValue={setBudgetInfo(value => setBudgetInfo({...budgetInfo!, salaryAndWages: value}))}
+          onChangeValue={value => setBudgetInfo({...budgetInfo!, entertainmentExpenses: value!})}
           prefix="$"
           delimiter=","
           separator="."
           precision={2}
-          onChangeText={(formattedValue) => {
-            console.log(formattedValue); // $2,310.46
-          }}
         />
         <Text>Retirement</Text>
         <CurrencyInput
-          value={budgetInfo?.salaryAndWages ?? 0}
+          value={budgetInfo?.retirementExpenses ?? 0}
           style={styles.currencyInput}
-          //onChangeValue={setBudgetInfo(value => setBudgetInfo({...budgetInfo!, salaryAndWages: value}))}
+          onChangeValue={value => setBudgetInfo({...budgetInfo!, retirementExpenses: value!})}
           prefix="$"
           delimiter=","
           separator="."
           precision={2}
-          onChangeText={(formattedValue) => {
-            console.log(formattedValue); // $2,310.46
-          }}
         />
         <Text>Personal care</Text>
         <CurrencyInput
-          value={budgetInfo?.salaryAndWages ?? 0}
+          value={budgetInfo?.personalCareExpenses ?? 0}
           style={styles.currencyInput}
-          //onChangeValue={setBudgetInfo(value => setBudgetInfo({...budgetInfo!, salaryAndWages: value}))}
+          onChangeValue={value => setBudgetInfo({...budgetInfo!, personalCareExpenses: value!})}
           prefix="$"
           delimiter=","
           separator="."
           precision={2}
-          onChangeText={(formattedValue) => {
-            console.log(formattedValue); // $2,310.46
-          }}
         />
         <Text>Pets</Text>
         <CurrencyInput
-          value={budgetInfo?.salaryAndWages ?? 0}
+          value={budgetInfo?.petsExpenses ?? 0}
           style={styles.currencyInput}
-          //onChangeValue={setBudgetInfo(value => setBudgetInfo({...budgetInfo!, salaryAndWages: value}))}
+          onChangeValue={value => setBudgetInfo({...budgetInfo!, petsExpenses: value!})}
           prefix="$"
           delimiter=","
           separator="."
           precision={2}
-          onChangeText={(formattedValue) => {
-            console.log(formattedValue); // $2,310.46
-          }}
         />
         <Text>Other</Text>
         <CurrencyInput
-          value={budgetInfo?.salaryAndWages ?? 0}
+          value={budgetInfo?.otherExpenses ?? 0}
           style={styles.currencyInput}
-          //onChangeValue={setBudgetInfo(value => setBudgetInfo({...budgetInfo!, salaryAndWages: value}))}
+          onChangeValue={value => setBudgetInfo({...budgetInfo!, otherExpenses: value!})}
           prefix="$"
           delimiter=","
           separator="."
           precision={2}
-          onChangeText={(formattedValue) => {
-            console.log(formattedValue); // $2,310.46
-          }}
         />
       </View>
       <View style={{backgroundColor: Colors[colorScheme!]["surface"], borderRadius: 10, paddingVertical: 20, paddingHorizontal: 14, marginVertical: 10}}>
         <Text style={{fontSize: 28, fontWeight: 'bold'}}>Monthly Savings</Text>
         <Text>Emergency fund</Text>
         <CurrencyInput
-          value={budgetInfo?.salaryAndWages ?? 0}
+          value={budgetInfo?.emergencyFunds ?? 0}
           style={styles.currencyInput}
-          //onChangeValue={setBudgetInfo(value => setBudgetInfo({...budgetInfo!, salaryAndWages: value}))}
+          onChangeValue={value => setBudgetInfo({...budgetInfo!, emergencyFunds: value!})}
           prefix="$"
           delimiter=","
           separator="."
           precision={2}
-          onChangeText={(formattedValue) => {
-            console.log(formattedValue); // $2,310.46
-          }}
         />
         <Text>Retirement</Text>
         <CurrencyInput
-          value={budgetInfo?.salaryAndWages ?? 0}
+          value={budgetInfo?.retirementExpenses ?? 0}
           style={styles.currencyInput}
+          onChangeValue={value => setBudgetInfo({...budgetInfo!, retirementExpenses: value!})}
           //onChangeValue={setBudgetInfo(value => setBudgetInfo({...budgetInfo!, salaryAndWages: value}))}
           prefix="$"
           delimiter=","
           separator="."
           precision={2}
-          onChangeText={(formattedValue) => {
-            console.log(formattedValue); // $2,310.46
-          }}
         />
         <Text>Investments</Text>
         <CurrencyInput
-          value={budgetInfo?.salaryAndWages ?? 0}
+          value={budgetInfo?.investmentExpenses ?? 0}
           style={styles.currencyInput}
-          //onChangeValue={setBudgetInfo(value => setBudgetInfo({...budgetInfo!, salaryAndWages: value}))}
+          onChangeValue={value => setBudgetInfo({...budgetInfo!, investmentExpenses: value!})}
           prefix="$"
           delimiter=","
           separator="."
           precision={2}
-          onChangeText={(formattedValue) => {
-            console.log(formattedValue); // $2,310.46
-          }}
         /><Text>Other</Text>
         <CurrencyInput
-          value={budgetInfo?.salaryAndWages ?? 0}
+          value={budgetInfo?.otherSavings ?? 0}
           style={styles.currencyInput}
-          //onChangeValue={setBudgetInfo(value => setBudgetInfo({...budgetInfo!, salaryAndWages: value}))}
+          onChangeValue={value => setBudgetInfo({...budgetInfo!, otherSavings: value!})}
           prefix="$"
           delimiter=","
           separator="."
           precision={2}
-          onChangeText={(formattedValue) => {
-            console.log(formattedValue); // $2,310.46
-          }}
         />
       </View>
-      <Button title='Submit' onPress={()=>{}}/>
+      <Button title='Submit' onPress={()=>{navigation.navigate('ExpensesReportScreen', {budgetInfo: budgetInfo})}}/>
 
     </Scroller>
   )

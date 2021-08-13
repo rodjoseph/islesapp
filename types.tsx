@@ -25,6 +25,7 @@ export type MainStackParamList = {
   CardGameScreen: undefined;
   ExpensesScreen: undefined;
   SavingsScreen: undefined;
+  ExpensesReportScreen: {budgetInfo: BudgetInfo};
 };
 
 export type TabOneParamList = {
@@ -34,3 +35,22 @@ export type TabOneParamList = {
 export type TabTwoParamList = {
   TabTwoScreen: undefined;
 };
+
+export type BudgetInfo = {
+  salaryAndWages: number,
+  otherIncome: number,
+  housingExpenses: number,
+  foodExpenses: number,
+  transportationExpenses: number,
+  childCareExpenses: number,
+  loanExpenses: number,
+  insuranceExpenses: number,
+  entertainmentExpenses: number,
+  personalCareExpenses: number,
+  petsExpenses: number,
+  otherExpenses: number,
+  emergencyFunds: number,
+  retirementExpenses: number,
+  investmentExpenses: number,
+  otherSavings: number
+}

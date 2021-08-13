@@ -26,6 +26,8 @@
     "@ui-kitten/components": "^5.1.1",
     "@ui-kitten/eva-icons": "^5.1.1",
     "babel-preset-expo": "^8.4.1",
+    "currency.js": "^2.0.4",
+    "dinero.js": "^2.0.0-alpha.8",
     "expo": "^42.0.3",
     "expo-asset": "^8.3.3",
     "expo-constants": "~11.0.1",
@@ -37,6 +39,7 @@
     "expo-web-browser": "~9.2.0",
     "financejs": "^4.1.0",
     "metro": "^0.66.2",
+    "qs": "^6.10.1",
     "react": "16.13.1",
     "react-native": "^0.64.2",
     "react-native-card-flip": "^1.0.7",
@@ -59,6 +62,7 @@
     "typescript": "^4.3.5"
   },
   "devDependencies": {
+    "@types/qs": "^6.9.7",
     "@types/react": "~16.9.35",
     "@types/react-native": "^0.63.53",
     "jest-expo": "^42.1.0",
