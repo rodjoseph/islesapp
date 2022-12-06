@@ -30,7 +30,7 @@
     "expo-web-browser": "~9.2.0",
     "financejs": "^4.1.0",
     "metro": "^0.66.2",
-    "qs": "^6.10.1",
+    "qs": "^6.10.3",
     "react": "16.13.1",
     "react-native": "^0.64.2",
     "react-native-card-flip": "^1.0.7",
